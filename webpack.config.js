@@ -4,8 +4,8 @@ const TerserPlugin = require("terser-webpack-plugin");
 const htmlWebpackPlugin = require('html-webpack-plugin');
 const config = {
   performance: { hints: false },
-  //mode: "production",
-  mode: 'development',
+  mode: "production",
+  //mode: 'development',
   entry: [path.resolve(__dirname, "src/index.tsx")]
   ,
   output: {
@@ -21,7 +21,6 @@ const config = {
       {
         test: /\.(js|jsx)$/,
         use: ["source-map-loader"],
-        exclude: /node_modules/,
         enforce: "pre"
       },
       {
