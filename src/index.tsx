@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { JSWindow, ListView } from "@jswf/react";
+import { JSWindow, ListView, SplitView } from "@jswf/react";
 
 function App() {
   let listViewRef = React.useRef<ListView>(null);
@@ -8,30 +8,30 @@ function App() {
     let count = 1;
   return (
     <>
-      <JSWindow title="情報表示用" x={0} y={0}>
-        <button
-          onClick={() => {
-            //アイテムを動的に追加
-            listViewRef.current!.addItem([count++, "馬<br/>糞", 0, 1]);
-            listViewRef.current!.addItem([count++, <>馬<br/>糞</>, 0, 1]);
-          }}
-        >
-          追加
-        </button>
-        <button
-          onClick={() => {
-            const items = listViewRef.current!.getSelectItems();
-            items.sort((a,b)=>b-a);
-            for(const item of items)
-              listViewRef.current!.removeItem(item);
-          }}
-        >
-          削除
-        </button>
-        <br/>
-        {message}
-      </JSWindow>
-      <JSWindow title="ListViewの実装中">
+      <JSWindow width={600} title="ListViewの実装中" x={0} y={0}>
+        <SplitView>
+          <div>
+            <button
+              onClick={() => {
+                //アイテムを動的に追加
+                listViewRef.current!.addItem([count++, "馬<br/>糞", 0, 1]);
+                listViewRef.current!.addItem([count++, <>馬<br/>糞</>, 0, 1]);
+              }}
+            >
+              追加
+            </button><br/>文字列と仮想DOMを追加<br/><br/>
+            <button
+              onClick={() => {
+                const items = listViewRef.current!.getSelectItems();
+                items.sort((a,b)=>b-a);
+                for(const item of items)
+                  listViewRef.current!.removeItem(item);
+              }}
+            >
+              削除
+            </button><br/>選択したものを削除<br/><br/>
+            {message}
+        </div>
         <ListView
           ref={listViewRef}
           onItemClick={(row, col) => {
@@ -63,6 +63,7 @@ function App() {
             <div>{count++}</div><div>鉄の剣</div><div>40</div><div>700</div>
           </div>
         </ListView>
+        </SplitView>
       </JSWindow>
     </>
   );
