@@ -23,7 +23,6 @@ function App() {
             <button onClick={()=>{
               const items = treeView.current!.getCheckItems();
               for(const item of items)
-              //console.log(item.getLabel())
                   item.remove();
               }}>チェックを削除</button><br/><br/>
             {message}

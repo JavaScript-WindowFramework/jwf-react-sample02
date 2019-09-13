@@ -2316,15 +2316,15 @@ var TreeItem = /** @class */ (function (_super) {
             .filter(function (item) {
             return item.type === TreeItem;
         })
-            .map(function (item) { return Manager_1.objectAssign({}, item.props); });
-        _this.state = {
-            items: items
-        };
+            .map(function (item) {
+            return Manager_1.objectAssign({}, item.props);
+        });
+        _this.items = items;
         return _this;
     }
     TreeItem.prototype.render = function () {
         var _this = this;
-        this.itemsRef = this.state.items.map(function () {
+        this.itemsRef = this.items.map(function () {
             return react_1.createRef();
         });
         return (react_1.default.createElement(TreeItem_style_1.Root, null,
@@ -2366,7 +2366,7 @@ var TreeItem = /** @class */ (function (_super) {
                 } },
                 react_1.default.createElement("div", null,
                     react_1.default.createElement("div", { id: "line" }),
-                    react_1.default.createElement("div", { id: "children" }, this.state.items.map(function (item, index) { return (react_1.default.createElement(TreeItem, __assign({}, item, { key: index, ref: _this.itemsRef[index], treeView: _this.props.treeView, parent: _this }))); }))))));
+                    react_1.default.createElement("div", { id: "children" }, this.items.map(function (item, index) { return (react_1.default.createElement(TreeItem, __assign({}, item, { key: index, ref: _this.itemsRef[index], treeView: _this.props.treeView, parent: _this }))); }))))));
     };
     TreeItem.prototype.getLabel = function () {
         return this.props.label;
@@ -2396,7 +2396,7 @@ var TreeItem = /** @class */ (function (_super) {
         return items;
     };
     TreeItem.prototype.addItem = function (props) {
-        this.state.items.push(props);
+        this.items.push(props);
         this.forceUpdate();
     };
     TreeItem.prototype.delItem = function (item) {
@@ -2408,9 +2408,7 @@ var TreeItem = /** @class */ (function (_super) {
                 this.props.treeView.getSelectItem() === this.itemsRef[index].current)
                 this.props.treeView.selectItem(null);
             this.itemsRef.splice(index, 1);
-            var items = this.state.items.slice();
-            items.splice(index, 1);
-            this.setState({ items: items });
+            this.items.splice(index, 1);
             this.forceUpdate();
             return true;
         }
@@ -2433,7 +2431,7 @@ var TreeItem = /** @class */ (function (_super) {
         this.forceUpdate();
     };
     TreeItem.prototype.getChildren = function () {
-        return this.state.items;
+        return this.items;
     };
     TreeItem.prototype.onSelect = function (select) {
         this.setParentState({ select: select });
@@ -2460,12 +2458,11 @@ var TreeItem = /** @class */ (function (_super) {
             return itemRef.current === item;
         });
         if (index >= 0) {
-            var items = this.state.items.slice();
             for (var _i = 0, _a = Object.keys(state); _i < _a.length; _i++) {
                 var key = _a[_i];
-                items[index][key] = state[key];
+                this.items[index][key] = state[key];
             }
-            this.setState({ items: items });
+            this.forceUpdate();
         }
     };
     TreeItem.prototype.setParentState = function (state) {
@@ -39925,7 +39922,6 @@ function App() {
                             var items = treeView.current.getCheckItems();
                             for (var _i = 0, items_1 = items; _i < items_1.length; _i++) {
                                 var item = items_1[_i];
-                                //console.log(item.getLabel())
                                 item.remove();
                             }
                         } }, "\u30C1\u30A7\u30C3\u30AF\u3092\u524A\u9664"),
