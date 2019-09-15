@@ -1,6 +1,6 @@
 import * as React from "react";
 import {
-  JSWindow, ListView, SplitView
+  JSWindow, ListView, SplitView, ListHeaders, ListHeader, ListRow, ListItem, ListViewDragData
 } from "@jswf/react";
 
 export function ListViewTest() {
@@ -60,6 +60,7 @@ export function ListViewTest() {
           </div>
           <ListView
             ref={listViewRef}
+            draggable={true}
             onItemClick={(row, col) => {
               //アイテムの取得
               const item = listViewRef.current!.getItem(row, col);
@@ -68,52 +69,51 @@ export function ListViewTest() {
                 setMessage(`「${item.toString()}」がクリックされました`);
             }}
             onDrop = {(e)=>{
-              const items = JSON.parse(e.dataTransfer.getData("text/plain"));
-              for(const item of items)
-                listViewRef.current!.addItem( item as React.ReactNode[]);
-             // console.log(e.dataTransfer.getData("text/plain"));
+              const dragData = JSON.parse(e.dataTransfer.getData("text/plain")) as ListViewDragData;
+              for(const item of dragData.items)
+                listViewRef.current!.addItem( item.labels);
             }}
           >
-            <div>
-              <div data-type="number">No</div>
-              <div data-width={100}>
+            <ListHeaders>
+              <ListHeader type="number">No</ListHeader>
+              <ListHeader width={100}>
                 武器の
                 <br />
                 名前
-              </div>
-              <div data-type="number">攻撃力</div>
-              <div data-type="number">価格</div>
-            </div>
-            <div>
-              <div>{count++}</div>
-              <div>竹槍</div>
-              <div>5</div>
-              <div>10</div>
-            </div>
-            <div>
-              <div>{count++}</div>
-              <div>棍棒</div>
-              <div>10</div>
-              <div>40</div>
-            </div>
-            <div>
-              <div>{count++}</div>
-              <div>銅の剣</div>
-              <div>18</div>
-              <div>120</div>
-            </div>
-            <div>
-              <div>{count++}</div>
-              <div>鉄の槍</div>
-              <div>30</div>
-              <div>380</div>
-            </div>
-            <div>
-              <div>{count++}</div>
-              <div>鉄の剣</div>
-              <div>40</div>
-              <div>700</div>
-            </div>
+              </ListHeader>
+              <ListHeader type="number">攻撃力</ListHeader>
+              <ListHeader type="number">価格</ListHeader>
+            </ListHeaders>
+            <ListRow>
+              <ListItem>{count++}</ListItem>
+              <ListItem>竹槍</ListItem>
+              <ListItem>5</ListItem>
+              <ListItem>10</ListItem>
+            </ListRow>
+            <ListRow>
+              <ListItem>{count++}</ListItem>
+              <ListItem>棍棒</ListItem>
+              <ListItem>10</ListItem>
+              <ListItem>40</ListItem>
+            </ListRow>
+            <ListRow>
+              <ListItem>{count++}</ListItem>
+              <ListItem>銅の剣</ListItem>
+              <ListItem>18</ListItem>
+              <ListItem>120</ListItem>
+            </ListRow>
+            <ListRow>
+              <ListItem>{count++}</ListItem>
+              <ListItem>鉄の槍</ListItem>
+              <ListItem>30</ListItem>
+              <ListItem>380</ListItem>
+            </ListRow>
+            <ListRow>
+              <ListItem>{count++}</ListItem>
+              <ListItem>鉄の剣</ListItem>
+              <ListItem>40</ListItem>
+              <ListItem>700</ListItem>
+            </ListRow>
           </ListView>
         </SplitView>
       </JSWindow>

@@ -1,6 +1,6 @@
 import React, { ReactElement, useEffect } from "react";
 import * as ReactDOM from "react-dom";
-import { JSWindow, ListView } from "@jswf/react";
+import { JSWindow, ListView, ListHeaders, ListRow, ListHeader, ListItem } from "@jswf/react";
 import { SimpleWindow } from "./Samples/SimpleWindow";
 import { BasicWindow } from "./Samples/BasicWindow";
 import { SplitBar } from "./Samples/SplitBar";
@@ -28,17 +28,17 @@ function CompornentList() {
     <>
       <JSWindow x={0} y={0} width={600} title="Sample list">
         <ListView onItemClick={onItemClick}>
-          <div>
-            <div data-type="number">No</div>
-            <div data-width={200}>Name</div>
-            <div>Info</div>
-          </div>
+          <ListHeaders>
+            <ListHeader type="number">No</ListHeader>
+            <ListHeader width={200}>Name</ListHeader>
+            <ListHeader>Info</ListHeader>
+          </ListHeaders>
           {Compornents.map((c, index) => (
-            <div key={index}>
-              <div>{++count}</div>
-              <div>{c[1]}</div>
-              <div>{c[2]}</div>
-            </div>
+            <ListRow key={index}>
+              <ListItem>{++count}</ListItem>
+              <ListItem>{c[1]}</ListItem>
+              <ListItem>{c[2]}</ListItem>
+            </ListRow>
           ))}
         </ListView>
       </JSWindow>
