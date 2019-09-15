@@ -65,8 +65,9 @@ const config = {
   ],
   devServer: {
     open: true,
+    openPage:"dist/index.html",
     inline:true,
-    contentBase: path.join(__dirname, 'dist'),
+    contentBase: path.join(__dirname, '.'),
     host: "localhost"
   }
 };
