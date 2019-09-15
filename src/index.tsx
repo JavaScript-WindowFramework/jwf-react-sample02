@@ -57,7 +57,6 @@ function CompornentList() {
   function getSrc(path: string) {
     const req = new XMLHttpRequest();
     req.onreadystatechange = () => {
-      console.log(req.readyState);
       if (req.readyState == 4) {
         if (req.status == 200) setSrc(req.responseText);
         else setSrc(`Error:${req.readyState}`);
