@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "npx webpack-dev-server",
-    "build": "npx webpack",
+    "build": "npx webpack --mode production",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -39,7 +39,7 @@
     "tslint-loader": "^3.5.4",
     "typescript": "^3.6.3",
     "url-loader": "^2.1.0",
-    "webpack": "^4.39.3",
+    "webpack": "^4.40.1",
     "webpack-cli": "^3.3.8",
     "webpack-dev-server": "^3.8.0"
   }
