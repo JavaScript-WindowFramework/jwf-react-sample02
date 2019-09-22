@@ -1,13 +1,12 @@
 const path = require("path");
 const glob = require("glob");
 const TerserPlugin = require("terser-webpack-plugin");
-const htmlWebpackPlugin = require('html-webpack-plugin');
+const htmlWebpackPlugin = require("html-webpack-plugin");
 const config = {
   performance: { hints: false },
   //mode: "production",
-  mode: 'development',
-  entry: [path.resolve(__dirname, "src/index.tsx")]
-  ,
+  mode: "development",
+  entry: [path.resolve(__dirname, "src/index.tsx")],
   output: {
     filename: "bundle.js",
     path: path.resolve(__dirname, "dist")
@@ -36,7 +35,10 @@ const config = {
   resolve: {
     symlinks: false,
     extensions: [".ts", ".js", ".tsx", ".scss", "css", ".svg", ".gif"],
-    modules: ["node_modules"]
+    modules: ["node_modules"],
+    alias: {
+      "styled-components": path.resolve("node_modules", "styled-components")
+    }
   },
   optimization: {
     minimizer: [
@@ -56,7 +58,6 @@ const config = {
     providedExports: true,
     usedExports: true,
     concatenateModules: true
-
   },
   plugins: [
     new htmlWebpackPlugin({
@@ -65,9 +66,9 @@ const config = {
   ],
   devServer: {
     open: true,
-    openPage:"dist/index.html",
-    inline:true,
-    contentBase: path.join(__dirname, '.'),
+    //openPage:"dist",
+    inline: true,
+    contentBase: path.join(__dirname, "."),
     host: "localhost"
   }
 };

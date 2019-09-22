@@ -1,10 +1,10 @@
 import * as React from "react";
 import { JSWindow } from "@jswf/react";
 
-export function BasicWindow() {
+export function WindowBasic() {
   return (
     <JSWindow
-      title="Basic Window"
+      title="WindowBasic"
       x={100}
       y={100}
       width={600}
@@ -14,7 +14,7 @@ export function BasicWindow() {
       clientStyle={{ backgroundColor: "#CCFFCC" }}
     >
       <pre>{`
-        title="Simple Window"
+        title="WindowBasic"
         x={100}
         y={100}
         width={600}

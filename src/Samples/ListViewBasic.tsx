@@ -3,7 +3,7 @@ import {
   JSWindow, ListView, SplitView, ListHeaders, ListHeader, ListRow, ListItem, ListViewDragData
 } from "@jswf/react";
 
-export function ListViewTest() {
+export function ListViewBasic() {
     let listViewRef = React.useRef<ListView>(null);
   const [message, setMessage] = React.useState("");
   let count = 1;
@@ -14,48 +14,26 @@ export function ListViewTest() {
             <button
               onClick={() => {
                 //アイテムを動的に追加
-                listViewRef.current!.addItem([
-                  count++,
-                  <>
-                    馬<br />糞
-                  </>,
-                  0,
-                  1
-                ]);
+                listViewRef.current!.addItem([count++,<>馬<br />糞</>,0,1]);
               }}
-            >
-              追加
-            </button>
-            <br />
-            文字列と仮想DOMを追加
-            <br />
-            <br />
+            >追加</button>
+            <br />文字列と仮想DOMを追加<br /><br />
             <button
               onClick={() => {
                 const items = listViewRef.current!.getSelectItems();
                 for (const item of items)
                   listViewRef.current!.setItem(item, 1, "馬糞");
               }}
-            >
-              変更
-            </button>
-            <br />
-            選択したものを馬糞に変える
-            <br />
-            <br />
+            >変更</button><br />
+            選択したものを馬糞に変える<br /><br />
             <button
               onClick={() => {
                 const items = listViewRef.current!.getSelectItems();
                 items.sort((a, b) => b - a);
                 for (const item of items) listViewRef.current!.removeItem(item);
               }}
-            >
-              削除
-            </button>
-            <br />
-            選択したものを削除
-            <br />
-            <br />
+            >削除</button><br />
+            選択したものを削除<br /><br />
             {message}
           </div>
           <ListView
@@ -76,11 +54,7 @@ export function ListViewTest() {
           >
             <ListHeaders>
               <ListHeader type="number">No</ListHeader>
-              <ListHeader width={100}>
-                武器の
-                <br />
-                名前
-              </ListHeader>
+              <ListHeader width={100}>武器の<br />名前</ListHeader>
               <ListHeader type="number">攻撃力</ListHeader>
               <ListHeader type="number">価格</ListHeader>
             </ListHeaders>

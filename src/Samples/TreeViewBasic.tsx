@@ -7,7 +7,7 @@ import {
   TreeItemStyle
 } from "@jswf/react";
 
-export function TreeViewTest() {
+export function TreeViewBasic() {
   const treeViewRef = React.useRef<TreeView>(null);
   const [message, setMessage] = React.useState();
   return (
@@ -17,33 +17,23 @@ export function TreeViewTest() {
           <button
             onClick={() => {
               const item = treeViewRef.current!.getSelectItem();
-              if (item) item.addItem({ label: "追加" });
+              if (item){
+                 item.addItem({ label: "追加" });
+              }
             }}
-          >
-            追加
-          </button>
-          <br />
-          <br />
+          >追加</button><br /><br />
           <button
             onClick={() => {
               const item = treeViewRef.current!.getSelectItem();
               if (item) item.remove();
             }}
-          >
-            選択を削除
-          </button>
-          <br />
-          <br />
+          >選択を削除</button><br /><br />
           <button
             onClick={() => {
               const items = treeViewRef.current!.getCheckItems();
               for (const item of items) item.remove();
             }}
-          >
-            チェックを削除
-          </button>
-          <br />
-          <br />
+          >チェックを削除</button><br /><br />
           {message}
         </div>
 
@@ -60,13 +50,7 @@ export function TreeViewTest() {
             </TreeItem>
             <TreeItem label={<b>太字</b>}>
               <TreeItem
-                label={
-                  <>
-                    改行を
-                    <br />
-                    含む
-                  </>
-                }
+                label={<>改行を<br />含む</>}
               ></TreeItem>
             </TreeItem>
             <TreeItem label={<input defaultValue="TextBoxも入る" />} />

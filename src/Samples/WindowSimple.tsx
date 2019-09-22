@@ -3,9 +3,9 @@ import {
   JSWindow
 } from "@jswf/react";
 
-export function SimpleWindow() {
+export function WindowSimple() {
   return (
-    <JSWindow title="Simple Window">
+    <JSWindow title="WindowSimple">
       Simple Window
     </JSWindow>
   );

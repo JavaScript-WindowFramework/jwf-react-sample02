@@ -1,13 +1,13 @@
 import * as React from "react";
 import { JSWindow, SplitType, SplitView } from "@jswf/react";
 
-export function SplitBar() {
+export function SplitViewBasic() {
   const [type, setType] = React.useState<SplitType>("ew");
   return (
     <JSWindow
       width={500}
       height={400}
-      title="Split bar"
+      title="SplitViewBasic"
       clientStyle={{ display: "flex", flexDirection: "column" }}
     >
       {/* Button installation */}
