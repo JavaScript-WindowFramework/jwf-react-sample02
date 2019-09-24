@@ -1,17 +1,15 @@
 import React, { useRef, useState, useLayoutEffect } from "react";
 import {
-  JSWindow,
   ListView,
   ListHeaders,
   ListHeader,
   ListItem,
-  ListRow,
-  WindowProps
+  ListRow
 } from "@jswf/react";
 
 export interface SettingValue {
   name: string;
-  value: string|number|boolean;
+  value: string | number | boolean;
   type: string;
   options?: { label?: string; value: string }[];
 }
@@ -32,7 +30,10 @@ export function InputText(props: React.InputHTMLAttributes<HTMLInputElement>) {
     />
   );
 }
-type Props = { values: SettingValue[]; onChange?: (values:SettingValue[]) => void };
+type Props = {
+  values: SettingValue[];
+  onChange?: (values: SettingValue[]) => void;
+};
 
 export function SettingView(props: Props) {
   const [values, setValues] = useState<SettingValue[]>(props.values);
@@ -119,14 +120,18 @@ export function SettingView(props: Props) {
                 if (e.target) onFile(e.target.files!);
               }}
             />
-            <img
-              ref={imageRef}
-              style={{ maxWidth: "90%" }}
-              src={v.value as string}
-              onLoad={() => {
-                setValues([...values]);
-              }}
-            />
+            {v.value ? (
+              <img
+                ref={imageRef}
+                style={{ maxWidth: "90%" }}
+                src={v.value as string}
+                onLoad={() => {
+                  setValues([...values]);
+                }}
+              />
+            ) : (
+              "-"
+            )}
           </div>
         );
         break;
